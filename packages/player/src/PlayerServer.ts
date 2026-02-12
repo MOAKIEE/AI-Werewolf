@@ -17,7 +17,7 @@ import {
   SpeechResponseSchema
 } from '@ai-werewolf/types';
 import { WerewolfPrompts } from './prompts';
-import { generateObject } from 'ai';
+import { generateObject, generateText } from 'ai';
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
 import { createOpenAI } from '@ai-sdk/openai';
 import {
@@ -188,10 +188,78 @@ export class PlayerServer {
       console.log(`[${functionId}] result:`, JSON.stringify(result.object, null, 2));
 
       return result.object as T;
-    } catch (error) {
+    } catch (error: any) {
+      if (error?.name === 'AI_NoObjectGeneratedError' || error?.message?.includes('No object generated')) {
+        console.log(`[${functionId}] generateObject failed, falling back to generateText with JSON mode`);
+        return await this.generateWithFallback<T>(params);
+      }
       console.error(`AI ${functionId} failed:`, error);
       throw new Error(`Failed to generate ${functionId}: ${error}`);
     }
+  }
+
+  private async generateWithFallback<T>(
+    params: {
+      functionId: string;
+      schema: any;
+      prompt: string;
+      maxOutputTokens?: number;
+      temperature?: number;
+      context?: PlayerContext;
+    }
+  ): Promise<T> {
+    const { functionId, schema, prompt, maxOutputTokens, temperature } = params;
+
+    const schemaDescription = JSON.stringify(schema.shape, null, 2);
+    const enhancedPrompt = `${prompt}
+
+IMPORTANT: You must respond with a valid JSON object that matches this exact schema:
+${schemaDescription}
+
+Do not include any text before or after the JSON. Only output the JSON object.`;
+
+    try {
+      const result = await generateText({
+        model: this.getModel(),
+        prompt: enhancedPrompt,
+        maxTokens: maxOutputTokens || this.config.ai.maxTokens,
+        temperature: temperature ?? this.config.ai.temperature,
+      });
+
+      console.log(`[${functionId}] raw response:`, result.text);
+
+      const jsonMatch = result.text.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        throw new Error('No JSON object found in response');
+      }
+
+      const parsed = JSON.parse(jsonMatch[0]);
+      
+      const cleaned = this.cleanParsedObject(parsed, schema);
+      
+      console.log(`[${functionId}] parsed result:`, JSON.stringify(cleaned, null, 2));
+
+      return cleaned as T;
+    } catch (error) {
+      console.error(`AI ${functionId} fallback failed:`, error);
+      throw new Error(`Failed to generate ${functionId} (fallback): ${error}`);
+    }
+  }
+
+  private cleanParsedObject(obj: any, schema: any): any {
+    const result: any = {};
+    const schemaShape = schema.shape;
+    
+    for (const key of Object.keys(schemaShape)) {
+      if (obj.hasOwnProperty(key)) {
+        const value = obj[key];
+        if (value !== null && value !== undefined) {
+          result[key] = value;
+        }
+      }
+    }
+    
+    return result;
   }
 
   private getModel() {

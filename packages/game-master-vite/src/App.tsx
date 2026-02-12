@@ -51,7 +51,7 @@ function App() {
 
           <div className="text-center">
             <h1 className="text-3xl font-bold text-foreground tracking-tight">
-              MiniMax狼人杀demo
+              AI狼人杀demo
             </h1>
           </div>
 

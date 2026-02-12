@@ -41,6 +41,7 @@ echo    Frontend: http://localhost:3000/werewolf/
 echo    Backend:  http://localhost:3001
 echo.
 echo    Press Ctrl+C to stop
+echo    Or run stop.bat to release ports
 echo ========================================
 echo.
 

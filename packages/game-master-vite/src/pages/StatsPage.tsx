@@ -44,7 +44,7 @@ export function StatsPage() {
               📊 用户统计
             </h1>
             <p className="text-sm text-muted-foreground mt-2">
-              MiniMax狼人杀在线用户统计
+              AI狼人杀在线用户统计
             </p>
           </div>
         </div>
