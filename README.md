@@ -2,11 +2,10 @@
 
 一个基于 AI 的多人狼人杀游戏框架，支持多种 AI 模型提供商（OpenRouter、OpenAI、MiniMax），可以看到玩家的思考和发言之间的戏剧性表现，同时通过音乐语音等沉浸式方式增强真实感。
 
-🎮 **[在线体验 →](https://solution.minimaxi.com/werewolf/)**
 <img width="926" height="489" alt="image" src="https://github.com/user-attachments/assets/d545494d-5d18-4461-a116-bb4cbd61e587" />
 
 
-[![GitHub Stars](https://img.shields.io/github/stars/MiniMax-OpenPlatform/minimax-werewolf?style=social)](https://github.com/MiniMax-OpenPlatform/minimax-werewolf)
+[![GitHub Stars](https://img.shields.io/github/stars/MOAKIEE/AI-Werewolf?style=social)](https://github.com/MOAKIEE/AI-Werewolf)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](https://www.docker.com)
 
@@ -105,12 +104,12 @@ minimax-werewolf/
   - **OpenAI API Key**: 从 [OpenAI](https://platform.openai.com) 获取
   - **MiniMax API Key**: 从 [MiniMax 开放平台](https://platform.minimaxi.com) 获取
 
-### 安装步骤
+### 方式二：Docker 部署
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/MiniMax-OpenPlatform/minimax-werewolf.git
-cd minimax-werewolf
+git clone https://github.com/MOAKIEE/AI-Werewolf.git
+cd AI-Werewolf
 
 # 2. 构建并启动 Docker 容器
 docker compose up -d --build
@@ -121,6 +120,8 @@ docker compose ps
 # 4. 查看日志
 docker compose logs -f
 ```
+
+访问地址：**http://localhost:5001/werewolf/**
 
 ### 访问游戏
 
@@ -334,7 +335,10 @@ curl http://YOUR_SERVER_IP:5001/werewolf/health
 
 ## 🙏 致谢
 
-本项目基于 [AI-Werewolf](https://github.com/monad-developers/AI-Werewolf) 开源项目优化定制而来，感谢原作者的贡献！
+本项目基于以下开源项目开发：
+
+- [MiniMax 狼人杀](https://github.com/MiniMax-OpenPlatform/minimax-werewolf) - MiniMax 官方狼人杀 Demo
+- [AI-Werewolf](https://github.com/monad-developers/AI-Werewolf) - 原始 AI 狼人杀项目
 
 在原项目基础上，我们进行了以下优化和定制：
 - ✨ 添加了玩家个性化配置系统
@@ -344,7 +348,7 @@ curl http://YOUR_SERVER_IP:5001/werewolf/health
 - 🔧 更灵活的配置系统
 - 🎵 沉浸式模式：背景音乐 + TTS 语音
 - 🐳 Docker 一键部署
-- 🔌 **多模型支持**: 支持 OpenRouter、OpenAI、MiniMax 等多种 AI 提供商
+- 🔌 **多模型支持**: 支持 OpenRouter、OpenAI、MiniMax 及任何 OpenAI 兼容 API
 
 同时感谢以下开源项目和服务：
 - [MiniMax AI](https://www.minimaxi.com) - 强大的 AI 大模型服务
@@ -355,8 +359,8 @@ curl http://YOUR_SERVER_IP:5001/werewolf/health
 
 ## 📞 联系方式
 
-- GitHub Issues: [提交问题](https://github.com/MiniMax-OpenPlatform/minimax-werewolf/issues)
-- GitHub Discussions: [讨论区](https://github.com/MiniMax-OpenPlatform/minimax-werewolf/discussions)
+- GitHub Issues: [提交问题](https://github.com/MOAKIEE/AI-Werewolf/issues)
+- GitHub Discussions: [讨论区](https://github.com/MOAKIEE/AI-Werewolf/discussions)
 
 ---
 
