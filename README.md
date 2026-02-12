@@ -341,14 +341,9 @@ curl http://YOUR_SERVER_IP:5001/werewolf/health
 - [AI-Werewolf](https://github.com/monad-developers/AI-Werewolf) - 原始 AI 狼人杀项目
 
 在原项目基础上，我们进行了以下优化和定制：
-- ✨ 添加了玩家个性化配置系统
-- 📊 增强的游戏历史记录功能
-- 💭 显示 AI 内心独白和思考过程
-- 🎨 优化的 UI/UX 设计
-- 🔧 更灵活的配置系统
-- 🎵 沉浸式模式：背景音乐 + TTS 语音
-- 🐳 Docker 一键部署
-- 🔌 **多模型支持**: 支持 OpenRouter、OpenAI、MiniMax 及任何 OpenAI 兼容 API
+-  **多模型支持**: 前端界面可选择服务商（OpenRouter、OpenAI、MiniMax、自定义），支持任何 OpenAI 兼容 API
+- ⚙️ **自定义服务商**: 可输入自定义 Base URL，支持 DeepSeek、Moonshot、智谱 AI、Ollama 等
+- 🚀 **启动脚本**: 添加 Windows/Mac/Linux 一键启动脚本
 
 同时感谢以下开源项目和服务：
 - [MiniMax AI](https://www.minimaxi.com) - 强大的 AI 大模型服务
